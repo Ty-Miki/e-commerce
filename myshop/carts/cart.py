@@ -38,3 +38,20 @@ class Cart:
         if product_id in self.cart:
             del self.cart[product_id]
             self.save()
+
+    def __iter__(self):
+        '''Iterate ovet the items in the cart and get the products from the DB'''
+
+        product_ids = self.cart.keys()
+
+        # get the product objects from DB and add them to cart.
+        products = Product.objects.filter(id__in=product_ids)
+        cart = self.cart.copy()
+        for product in products:
+            cart[str(product.id)]['product'] = product
+        
+        # Iterate through the cart and yield a product item.
+        for item in cart.values():
+            item['price'] = Decimal(item['price'])
+            item['total_price'] = item['price'] * item['quantity']
+            yield item
