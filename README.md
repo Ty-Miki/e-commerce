@@ -18,6 +18,7 @@ Additionally it have a recomendation engine to recommend products to customers a
   - built functionlaity to create carts, (Initialized a **Cart** class inside *cart.py* file.),
   - built functionality to construct cart dictionaries, (*save()*, *add()* and *remove()* methods.),
   - built functionality to iterate through the items conatined in the cart and access the related product instances, (*__iter*__*()* method.),
+  - added methods to return count of total products, total price of products in the cart and a method to remove the cart from session, (*__len*__*()*, *get_total_price()* and *clear()* methods respectively.),
 
 *Concepts used: **Django sessions**
 
