@@ -15,7 +15,8 @@ Additionally it have a recomendation engine to recommend products to customers a
 
 - V2.0
   - added a new app for managing shopping carts,
-  - build functionlaity to create carts, (Initialized a **Cart** class inside *cart.py* file.),
+  - built functionlaity to create carts, (Initialized a **Cart** class inside *cart.py* file.),
+  - built functionality to construct cart dictionaries, (*save()*, *add()* and *remove()* methods.),
 
 *Concepts used: **Django sessions**
 
