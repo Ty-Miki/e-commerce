@@ -13,6 +13,12 @@ Additionally it have a recomendation engine to recommend products to customers a
 
 *Concepts used: **models**, **admin site**, **views**, **urls** and **templates** in Django.*
 
+- V2.0
+  - added a new app for managing shopping carts,
+  - build functionlaity to create carts, (Initialized a **Cart** class inside *cart.py* file.),
+
+*Concepts used: **Django sessions**
+
 #### Sitemap
 
 - **'/'** - *product list*
