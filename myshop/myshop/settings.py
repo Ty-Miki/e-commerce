@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import dotenv_values
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+CREDENTIALS = dotenv_values(BASE_DIR / 'myshop/.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -130,3 +133,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Session key for carts
 CART_SESSION_ID = 'cart'
+
+# Email server configuration
+# Make sure to setup the .env file using the same variables.
+
+EMAIL_HOST = CREDENTIALS.get('EMAIL_HOST')
+EMAIL_HOST_USER = CREDENTIALS.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = CREDENTIALS.get("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = int(CREDENTIALS.get("EMAIL_PORT"))
+EMAIL_USE_TLS = bool(CREDENTIALS.get("EMAIL_USE_TLS"))
+
+# Comment out the above configuration and uncomment this line if
+# you want to see the emails in the terminal instead.
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

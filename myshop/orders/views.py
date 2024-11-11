@@ -3,6 +3,7 @@ from .models import OrderItem
 from .forms import OrderCreateForm
 from carts.cart import Cart
 from django.http import HttpRequest, HttpResponse
+from .tasks import order_created
 
 def order_create(request: HttpRequest) -> HttpResponse:
     cart = Cart(request)
@@ -17,6 +18,9 @@ def order_create(request: HttpRequest) -> HttpResponse:
                                          quantity=item['quantity'])
             # Clear the cart
             cart.clear()
+
+            # launch asynchronous task to send emails
+            order_created.delay(order.id)
 
 
         return render(request,

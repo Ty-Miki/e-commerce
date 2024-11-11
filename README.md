@@ -21,11 +21,14 @@ Additionally it have a recomendation engine to recommend products to customers a
   - added methods to return count of total products, total price of products in the cart and a method to remove the cart from session, (*__len*__*()*, *get_total_price()* and *clear()* methods respectively.),
   - Appropriate views, forms, urls and templates are added to enable users add, remove, update and view their cart items.
 
-*New Concepts used: **Django sessions**
+*New Concepts used: **Django sessions***
 
 - Orders
   - This app handles the checkout process and is used to persist the cart items to the database as an order instance once users click checkout and fill in the appropraite data.
   - Appropriate models, forms, views, urls and templates are implemented for this purpose.
+  - Used Celery with RabbitMQ to send email notification to users after an order is successfully placed.
+
+  *New Concepts used: **Celery** and **RabbitMQ***
 
 
 #### Sitemap
@@ -35,3 +38,8 @@ Additionally it have a recomendation engine to recommend products to customers a
 - **'/product_id/product_slug/'** - *product detail*
 - **'/cart/'** - *cart detail*
 - **'/orders/create/'** - *orders create*
+
+#### Requirements
+
+- A **messaage borker for celery**, I used the official **RabbitMQ docker image**.
+- A **.env** file inside the **same directory as settings.py** and it should contain the configuration for the email server. (See the bottom of settings.py for further info).
