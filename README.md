@@ -30,6 +30,9 @@ Additionally it have a recomendation engine to recommend products to customers a
 
   *New Concepts used: **Celery** and **RabbitMQ***
 
+- Payment
+  - This app handles the payment process through stripe
+  - Requires a .env file inside the same direectory as *settings.py* and needs to have **STRIPE_PUBLISHABLE_KEY**, **STRIPE_SECRET_KEY** and **STRIPE_API_VERSION** variables. I used the 2022-08-01 stripe API version.
 
 #### Sitemap
 
