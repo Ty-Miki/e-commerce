@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'carts.apps.CartsConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Session key for carts
 CART_SESSION_ID = 'cart'
+ORDER_SESSION_ID = 'order_id'
 
 # Email server configuration
 # Make sure to setup the .env file using the same variables.
