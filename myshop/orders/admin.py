@@ -1,6 +1,12 @@
 from django.contrib import admin
 from .models import Order, OrderItem
 from django.utils.safestring import mark_safe
+from django.http import HttpResponse, HttpRequest
+from django.db.models.query import QuerySet
+
+import csv
+import datetime
+
 
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
@@ -14,6 +20,36 @@ def order_payment(obj: Order):
     return ''
 
 order_payment.short_description = 'Stripe payment'
+
+def export_to_csv(modeladmin: admin.ModelAdmin,
+                  request: HttpRequest,
+                  queryset: QuerySet) -> HttpResponse:
+    
+    options = modeladmin.model._meta
+    content_disposition = f'attachment; fiename={options.verbose_name}.csv'
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = content_disposition
+
+    writer = csv.writer(response)
+    fields = [field for field in options.get_fields() 
+              if not field.many_to_many 
+              and not field.one_to_many]
+    
+    # Write the first row with header info
+    writer.writerow([field.verbose_name for field in fields])
+    # Write data rows
+    for object in queryset:
+        data_row = []
+        for field in fields:
+            value = getattr(object, field.name)
+            if isinstance(value, datetime.datetime):
+                value = value.strftime('%d/%m/%Y')
+            data_row.append(value)
+        writer.writerow(data_row)
+    
+    return response
+export_to_csv.short_description = 'Export to CSV'
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'first_name', 'last_name', 'email', 
@@ -21,3 +57,4 @@ class OrderAdmin(admin.ModelAdmin):
                     order_payment ,'created', 'updated']
     list_filter = ['paid', 'created', 'updated']
     inlines = [OrderItemInline]
+    actions = [export_to_csv]

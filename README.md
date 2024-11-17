@@ -32,8 +32,8 @@ Additionally it have a recomendation engine to recommend products to customers a
 
 - Payment
   - This app handles the payment process through stripe
-  - Requires a .env file inside the same direectory as *settings.py* and needs to have **STRIPE_PUBLISHABLE_KEY**, **STRIPE_SECRET_KEY** and **STRIPE_API_VERSION** variables. I used the 2022-08-01 stripe API version.
-  - Now orders can have the paid flag on using stripe webhooks and they reference back to the stripe payment url using the stripe ID for the payment of that order. For this the .env file should be updated to have **STRIPE_WEBHOOK_SECRET** variable.
+  - Requires a .env file inside the same directory as *settings.py* and needs to have **STRIPE_PUBLISHABLE_KEY**, **STRIPE_SECRET_KEY** and **STRIPE_API_VERSION** variables. I used the 2022-08-01 stripe API version.
+  - Now orders can have the paid flag on using stripe webhooks and the admin can reference back to the stripe payment url using the stripe ID for the payment of that order. For this the .env file should be updated to have **STRIPE_WEBHOOK_SECRET** variable.
 
 #### Sitemap
 

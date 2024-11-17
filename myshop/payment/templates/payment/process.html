@@ -20,10 +20,11 @@
 
         <tbody>
             {% for item in order.items.all %}
-                <tr>
+                <tr lass="row{% cycle "1" "2" %}">
                     <td>
-                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"" 
-                        alt="Product Image">
+                        <img src="{% if item.product.image %}{{ item.product.image.url }}
+                            {% else %}{% static 'img/no_image.png' %}
+                            {% endif %}" alt="Product image">
                     </td>
                     <td>{{ item.product.name }}</td>
                     <td class="num">${{ item.price }}</td>
